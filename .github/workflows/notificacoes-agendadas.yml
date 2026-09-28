@@ -11,5 +11,6 @@ jobs:
     steps:
       - name: Chamar endpoint de notificações agendadas
         run: |
-          curl -sf -X POST "${{ secrets.BANCOU_API_URL }}/api/usuarios/notificacoes/disparar-agendadas/" \
+          curl -sS --fail-with-body --max-time 120 --retry 2 --retry-delay 20 \
+            -X POST "${{ secrets.BANCOU_API_URL }}/api/usuarios/notificacoes/disparar-agendadas/" \
             -H "X-Cron-Secret: ${{ secrets.NOTIFICACOES_CRON_SECRET }}"
