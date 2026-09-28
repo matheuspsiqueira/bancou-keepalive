@@ -1,24 +1,3 @@
-# .github/workflows/notificacoes-agendadas.yml
-#
-# Dispara a checagem de notificações push agendadas, batendo no endpoint
-# protegido do backend. Mesmo padrão do bancou-keepalive: GitHub Actions
-# como "relógio" externo, já que o Web Service do Render (free tier) não
-# tem um scheduler próprio.
-#
-# Horários em UTC (GitHub Actions cron não entende fuso). Brasília é
-# sempre UTC-3 (Brasil aboliu o horário de verão em 2019, sem variação
-# sazonal). Conversão dos horários da hierarquia (ver
-# usuarios/notificacoes.py):
-#   7h  BRT -> 10h UTC   (Tipo 1 — vidas restauradas)
-#   9h  BRT -> 12h UTC   (Tipo 5 — reengajamento, metade dos usuários)
-#   12h BRT -> 15h UTC   (Tipo 3 — convite casual)
-#   15h BRT -> 18h UTC   (Tipo 4 — desafio 60s)
-#   19h BRT -> 22h UTC   (Tipo 5 — reengajamento, outra metade)
-#   20h30-21h30 BRT -> 23h30-00h30 UTC (Tipo 2 — streak em risco)
-#
-# Só roda nessas janelas (não o dia inteiro) pra economizar minutos do
-# GitHub Actions — de 15 em 15 min dentro de cada hora necessária.
-
 name: Notificações agendadas
 
 on:
